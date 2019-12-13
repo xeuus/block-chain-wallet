@@ -15,8 +15,8 @@ const svd = new ServiceDiscovery(SVD_PORT);
 
 
 
-const wallet = new Wallet();
-const wallet2 = new Wallet();
+const wallet = new Wallet('homing');
+const wallet2 = new Wallet('aryan');
 
 
 const bc = new Blockchain();
@@ -57,4 +57,3 @@ const server = app.listen(SERVER_PORT, () => {
   });
   console.log(`[Http] listening on port ${server.address().port}`)
 });
-process.on('uncaughtException', (err) => console.log(err));

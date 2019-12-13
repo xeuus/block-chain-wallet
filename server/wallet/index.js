@@ -3,9 +3,9 @@ const Transaction = require('./transaction');
 const { INITIAL_BALANCE } = require('../config');
 
 module.exports = class Wallet {
-  constructor() {
+  constructor(name) {
     this.balance = INITIAL_BALANCE;
-    this.keyPair = ChainUtil.genKeyPair();
+    this.keyPair = ChainUtil.loadOrGenerate(name);
     this.publicKey = this.keyPair.getPublic().encode('hex'); // address
   }
   sign(dataHash) {

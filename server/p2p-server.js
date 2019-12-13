@@ -12,4 +12,3 @@ const p2pServer = new P2pServer(bc, svd, tp);
 svd.runClient(()=>{
   p2pServer.listen();
 });
-process.on('uncaughtException', (err) => console.log(err));
