@@ -1,39 +1,22 @@
 import React, {PureComponent} from 'react';
-import {Autowired, Consumer} from "coreact";
-import {Networking} from "./networking";
+import {Consumer} from "coreact";
+import {Route, Switch} from "react-router";
+import {routes} from "@lib/routes";
+import {Home} from "./home";
+import {Nav} from "./home/nav";
+import {AddAccount} from "./home/accounts/add";
+import {Accounts} from "./home/accounts";
 
 @Consumer
 export class App extends PureComponent {
-  net = Autowired(Networking, this);
-  state = {
-    data: '',
-    blocks: [] as any[],
-  };
-  changeData = (data: string) => this.setState({data});
-
-  componentDidMount(): void {
-    this.net.GET('/blocks').then(response => {
-      this.setState({blocks: response.payload})
-    })
-  }
-
   render() {
-    const {data, blocks} = this.state;
     return <>
-      <div>
-        <input type="text" value={data} onChange={e => this.changeData(e.target.value)}/>
-        <button onClick={async () => {
-          const response = await this.net.POST('/transact', {
-            recipient: '09364003675', amount: 100,
-          });
-          this.setState({blocks: response.payload})
-        }}>submit
-        </button>
-      </div>
-
-      <div>
-        <pre>{JSON.stringify(blocks, null, '  ')}</pre>
-      </div>
-    </>
+      <Nav/>
+      <Switch>
+        <Route path={routes.home} component={Home} exact/>
+        <Route path={routes.accounts} component={Accounts} exact/>
+        <Route path={routes.addAccount} component={AddAccount} exact/>
+      </Switch>
+    </>;
   }
 }

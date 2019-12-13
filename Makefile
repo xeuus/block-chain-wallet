@@ -8,8 +8,6 @@ svd:
 	. ./.env && npm run svd
 p2p:
 	. ./.env && npm run p2p
-gw:
-	. ./.env && npm run gw
 run:
 	npm run start
 build:

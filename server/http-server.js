@@ -13,8 +13,13 @@ app.use(express.json());
 const {SVD_PORT, SERVER_PORT} = require('./config');
 const svd = new ServiceDiscovery(SVD_PORT);
 
-const bc = new Blockchain();
+
+
 const wallet = new Wallet();
+const wallet2 = new Wallet();
+
+
+const bc = new Blockchain();
 const tp = new TransactionPool();
 const p2pServer = new P2pServer(bc, svd, tp);
 const miner = new Miner(bc, tp, p2pServer);
@@ -29,28 +34,17 @@ app.get('/api/mine-transactions', (req, res) => {
 });
 
 app.get('/api/balance', (req, res) => {
-  res.json({ balance: wallet.calculateBalance(bc) });
-});
-
-app.post('/api/mine', (req, res) => {
-  bc.addBlock(req.body.data);
-  p2pServer.syncChains();
-  res.json(bc.chain);
-});
-
-app.get('/api/transactions', (req, res) => {
-  res.json(tp.transactions);
+  res.json({
+    balance: wallet.calculateBalance(bc),
+    balance2: wallet2.calculateBalance(bc),
+  });
 });
 
 app.post('/api/transact', (req, res) => {
-  const { recipient, amount } = req.body;
-  const transaction = wallet.createTransaction(recipient, amount, bc, tp);
+  const { amount } = req.body;
+  const transaction = wallet.createTransaction(wallet2.publicKey, amount, bc, tp);
   p2pServer.broadcastTransaction(transaction);
   res.json(tp.transactions);
-});
-
-app.get('/api/public-key', (req, res) => {
-  res.json({ publicKey: wallet.publicKey });
 });
 
 app.get('/api/peers', (req, res) => {

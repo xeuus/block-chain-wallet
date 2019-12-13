@@ -1,6 +1,42 @@
-*, *:after, *:before
+html
   box-sizing: border-box
-
-body, html
-  margin: 0
+  -ms-overflow-style: scrollbar
   padding: 0
+  margin: 0
+  background: transparent
+
+body
+  padding: 0
+  margin: 0
+
+html, body, button, input, label, textarea
+  font-family: 'Open Sans', sans-serif
+
+textarea
+  resize: vertical
+*,
+*::before,
+*::after
+  box-sizing: inherit
+
+.bg-overlay
+  position: fixed
+  width: 100%
+  height: 100%
+  top: 0
+  left: 0
+  background: $gray-200
+  z-index: -10
+
+@import "bootstrap/grid"
+@import "bootstrap/forms"
+@import "bootstrap/buttons"
+
+@import "bootstrap/utilities/display"
+@import "bootstrap/utilities/flex"
+@import "bootstrap/utilities/spacing"
+@import "bootstrap/utilities/position"
+@import "bootstrap/utilities/background"
+
+
+@import "form-grid"

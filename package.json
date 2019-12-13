@@ -12,7 +12,6 @@
     "srv": ". ./.env && nodemon --watch server server/http-server.js",
     "p2p": ". ./.env && node server/p2p-server.js",
     "svd": ". ./.env && node server/svd-server.js",
-    "gw": ". ./.env && node server/gw-server.js",
     "test": "jest --watchAll"
   },
   "author": "Aryan Alikhani",

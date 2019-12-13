@@ -11,8 +11,10 @@ const server = new Server({
   mode: process.env.NODE_ENV,
   provider: () => require('./provider'),
   assets: process.env.NODE_ENV != 'production' ? [
+    '/assets/fonts/font.css',
     '/dist/app.js',
   ] : [
+    '/assets/fonts/font.css',
     '/dist/app.js.gz',
     '/dist/app.css',
   ],
