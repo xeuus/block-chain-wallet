@@ -5,6 +5,7 @@ const pack = require('../package.json');
 const version = pack.version.split('.').join('');
 const path = require('path');
 const app = express();
+const port = process.env.PORT;
 
 const server = new Server({
   mode: process.env.NODE_ENV,
@@ -34,5 +35,5 @@ const server = new Server({
 server.isolate(process.env.APP_NAME);
 server.start(app);
 
-app.listen(process.env.PORT, () => console.log(`Listening on port ${process.env.PORT}`));
+app.listen(port, () => console.log(`Listening on port ${port}`));
 process.on('uncaughtException', (err) => console.log(err));
